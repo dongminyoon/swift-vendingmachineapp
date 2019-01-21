@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     
     private func initialLabel() {
         let menuCount = 6
-        let machine: DrawAbleView? = self.machine
+        let machine: CommonAvailableMachine? = self.machine
         for menu in 1...menuCount {
             machine?.setDrinkLabel(menu, view: self)
         }
@@ -102,6 +102,21 @@ class ViewController: UIViewController {
         let userMode: UserAvailableMode? = machine
         userMode?.insert(coin: coin)
         userMode?.setCoinLabel(view: self)
+    }
+}
+
+protocol DrawableView {
+    func setLabel(menu: Int, form: (UILabel) -> Void)
+    func setcodd(form: (UILabel) -> Void)
+}
+
+extension ViewController: DrawableView {
+    func setLabel(menu: Int, form: (UILabel) -> Void) {
+        form(drinkLabels[menu-1])
+    }
+    
+    func setcodd(form: (UILabel) -> Void) {
+        form(currentCoin)
     }
 }
 
